@@ -41,7 +41,7 @@ class WelcomeScreen extends StatelessWidget {
                   const Expanded(
                     child: WelcomeButton(
                       buttonText: "sobre nosotros",
-                      onTap: ListView1Screen(),
+                      onTap: AboutScreen(),
                       color: Colors.transparent,
                       textColor: Colors.white,
                     ),

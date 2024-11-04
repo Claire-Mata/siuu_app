@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       initialRoute: 'welcome',
       routes: {
         'homeScreen': (context) => const HomeScreen(),
-        'listView': (context) => const ListView1Screen(),
+        'AboutScreen': (context) => const AboutScreen(),
         'welcome': (context) => const WelcomeScreen(),
       },
       theme: lightMode,
