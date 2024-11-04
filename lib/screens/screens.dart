@@ -1,8 +1,8 @@
-export 'package:siuu_app/screens/splash_screen.dart';
-export 'package:siuu_app/screens/welcome_screen.dart';
-export 'package:siuu_app/screens/login_screen.dart';
-export 'package:siuu_app/screens/activos_screen.dart';
-export 'package:siuu_app/screens/scanner_screen.dart';
-export 'package:siuu_app/screens/about_screen.dart';
+export 'package:siiu/screens/splash_screen.dart';
+export 'package:siiu/screens/welcome_screen.dart';
+export 'package:siiu/screens/login_screen.dart';
+export 'package:siiu/screens/activos_screen.dart';
+export 'package:siiu/screens/scanner_screen.dart';
+export 'package:siiu/screens/about_screen.dart';
 
 

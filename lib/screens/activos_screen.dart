@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart'; // Importa el paquete para la interfaz de usuario en Flutter.
 import 'package:hive/hive.dart'; // Importa Hive, una base de datos local.
-import 'package:siuu_app/services/api_services.dart'; // Importa el servicio para realizar llamadas a la API.
+import 'package:siiu/services/api_services.dart'; // Importa el servicio para realizar llamadas a la API.
 class ListView1Screen extends StatefulWidget {
   // Widget que representa una pantalla con una lista de activos.
   const ListView1Screen({super.key}); // Constructor con clave opcional para el widget.

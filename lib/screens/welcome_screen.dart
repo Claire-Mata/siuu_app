@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart'; // Importa el paquete de Flutter para construir la interfaz de usuario.
-import 'package:siuu_app/screens/screens.dart'; // Importa las pantallas de la aplicación desde un módulo específico.
-import 'package:siuu_app/theme/app_theme.dart'; // Importa el tema de la aplicación para utilizar colores y estilos.
-import 'package:siuu_app/widgets/widgets.dart'; // Importa widgets personalizados de la aplicación.
+import 'package:siiu/screens/screens.dart'; // Importa las pantallas de la aplicación desde un módulo específico.
+import 'package:siiu/theme/app_theme.dart'; // Importa el tema de la aplicación para utilizar colores y estilos.
+import 'package:siiu/widgets/widgets.dart'; // Importa widgets personalizados de la aplicación.
 
 class WelcomeScreen extends StatelessWidget { // Define la clase WelcomeScreen como un widget sin estado.
   const WelcomeScreen({super.key}); // Constructor que permite pasar una clave opcional.

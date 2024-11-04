@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart'; // Importando el paquete principal de Flutter para construir interfaces de usuario.
 import 'package:hive_flutter/hive_flutter.dart'; // Importando Hive Flutter para el uso de la base de datos local.
-import 'package:siuu_app/screens/screens.dart'; // Importando las pantallas personalizadas de la aplicación.
-import 'package:siuu_app/theme/app_theme.dart'; // Importando el tema personalizado de la aplicación.
+import 'package:siiu/screens/screens.dart'; // Importando las pantallas personalizadas de la aplicación.
+import 'package:siiu/theme/app_theme.dart'; // Importando el tema personalizado de la aplicación.
 void main() async {
   // Punto de entrada principal de la aplicación.
   // Asegurando que los elementos vinculados a Flutter estén inicializados antes de usar widgets o plugins.

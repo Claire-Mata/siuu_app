@@ -1,6 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart'; // Importa el paquete para la barra de navegación curva.
 import 'package:flutter/material.dart'; // Importa el paquete de material design de Flutter.
-import 'package:siuu_app/screens/screens.dart'; // Importa las pantallas que se utilizarán en la navegación.
+import 'package:siiu/screens/screens.dart'; // Importa las pantallas que se utilizarán en la navegación.
 
 class NavBar extends StatefulWidget { // Define una clase NavBar que extiende StatefulWidget.
   const NavBar({super.key}); // Constructor que permite pasar una clave.

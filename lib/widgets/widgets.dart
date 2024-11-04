@@ -1,4 +1,4 @@
-export 'package:siuu_app/widgets/navbar.dart';
-export 'package:siuu_app/widgets/welcome_button.dart';
-export 'package:siuu_app/widgets/custom_scaffold.dart';
+export 'package:siiu/widgets/navbar.dart';
+export 'package:siiu/widgets/welcome_button.dart';
+export 'package:siiu/widgets/custom_scaffold.dart';
 

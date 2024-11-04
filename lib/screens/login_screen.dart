@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart'; // Importa el paquete principal de Flutter para construir la interfaz de usuario.
-import 'package:siuu_app/theme/app_theme.dart'; // Importa el tema de la aplicación definido en otro archivo.
-import 'package:siuu_app/widgets/widgets.dart'; // Importa widgets personalizados de la aplicación.
-import 'package:siuu_app/services/api_services.dart'; // Importa el servicio para realizar llamadas a la API.
+import 'package:siiu/theme/app_theme.dart'; // Importa el tema de la aplicación definido en otro archivo.
+import 'package:siiu/widgets/widgets.dart'; // Importa widgets personalizados de la aplicación.
+import 'package:siiu/services/api_services.dart'; // Importa el servicio para realizar llamadas a la API.
 
 class SignInScreen extends StatefulWidget {
   // Clase que representa la pantalla de inicio de sesión.
