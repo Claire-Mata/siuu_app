@@ -1,65 +1,68 @@
-import 'package:flutter/material.dart';
-import 'package:hive/hive.dart'; // Importa Hive
-import 'package:siuu_app/services/api_services.dart';
-
-
+import 'package:flutter/material.dart'; // Importa el paquete para la interfaz de usuario en Flutter.
+import 'package:hive/hive.dart'; // Importa Hive, una base de datos local.
+import 'package:siuu_app/services/api_services.dart'; // Importa el servicio para realizar llamadas a la API.
 class ListView1Screen extends StatefulWidget {
-  const ListView1Screen({super.key});
-
+  // Widget que representa una pantalla con una lista de activos.
+  const ListView1Screen({super.key}); // Constructor con clave opcional para el widget.
   @override
   State<ListView1Screen> createState() => _ListView1ScreenState();
+  // Crea el estado mutable para este widget.
 }
-
 class _ListView1ScreenState extends State<ListView1Screen> {
-  String? token; // Variable para almacenar el token
-  List<dynamic>? hardwareList; // Variable para almacenar la lista de hardware
-
+  // Clase de estado que controla ListView1Screen.
+  String? token; // Variable para almacenar el token de autenticación.
+  List<dynamic>? hardwareList; // Variable para almacenar la lista de activos.
   @override
   void initState() {
+    // Método que se ejecuta al iniciar el estado.
     super.initState();
-    _loadToken(); // Carga el token cuando se inicializa el estado
+    _loadToken(); // Llama a la función que carga el token.
   }
-
   Future<void> _loadToken() async {
-    var box = await Hive.openBox('authBox'); // Abre la caja
-    token = box.get('token'); // Recupera el token
+    // Función que carga el token de una caja en Hive.
+    var box = await Hive.openBox('authBox'); // Abre la caja de autenticación.
+    token = box.get('token'); // Recupera el token de la caja.
     if (token != null) {
-      await _fetchHardware(); // Llama a la función para obtener el hardware si el token no es nulo
+      // Si el token existe
+      await _fetchHardware(); // Obtiene la lista de hardware.
     }
-    setState(() {}); // Actualiza el estado
+    setState(() {}); // Actualiza el estado para reflejar cambios.
   }
-
   Future<void> _fetchHardware() async {
-    ApiService apiService = ApiService(); // Crea una instancia de ApiService
+    // Función que obtiene la lista de hardware de la API.
+    ApiService apiService = ApiService(); // Instancia el servicio de API.
     try {
-      hardwareList = await apiService.getHardware(token!); // Obtiene la lista de hardware
+      hardwareList = await apiService.getHardware(token!); // Llama a la API para obtener los activos.
     } catch (e) {
-      print('Error al obtener hardware: $e'); // Maneja cualquier error
+      print('Error al obtener hardware: $e'); // Imprime un error si la llamada falla.
     }
-    setState(() {}); // Actualiza el estado para reflejar los cambios
+    setState(() {}); // Actualiza el estado para reflejar los datos obtenidos.
   }
-
   @override
   Widget build(BuildContext context) {
+    // Método que construye la interfaz de la pantalla.
     return Scaffold(
-      appBar: AppBar(title: const Text('Lista de Activos')),
+      // Estructura de la pantalla con AppBar y contenido en el cuerpo.
+      appBar: AppBar(title: const Text('Lista de Activos')), // Título en la barra de la aplicación.
       body: hardwareList != null
           ? ListView.builder(
-              itemCount: hardwareList!.length,
+              // Si hardwareList no es nulo, muestra la lista.
+              itemCount: hardwareList!.length, // Número de elementos en la lista.
               itemBuilder: (context, index) {
-                // Accede a los valores de manera segura
-                var hardware = hardwareList![index];
-                var hardwareName = hardware['name'] ?? 'Nombre no disponible'; // Usa un valor por defecto si es nulo
-                var inventoryCode = hardware['inventory_code'] ?? 'Código no disponible'; // Usa un valor por defecto si es nulo
-                var serialNumber = hardware['serial_number'] ?? 'Número de serie no disponible'; // Usa un valor por defecto si es nulo
+                // Función que construye cada elemento en la lista.
+                var hardware = hardwareList![index]; // Accede al elemento actual.
+                var hardwareName = hardware['name'] ?? 'Nombre no disponible'; // Nombre del activo o valor por defecto.
+                var inventoryCode = hardware['inventory_code'] ?? 'Código no disponible'; // Código de inventario o valor por defecto.
+                var serialNumber = hardware['serial_number'] ?? 'Número de serie no disponible'; // Número de serie o valor por defecto.
 
                 return ListTile(
-                  title: Text(hardwareName),
-                  subtitle: Text('Código: $inventoryCode\nNúmero de serie: $serialNumber'), // Muestra más información
+                  // Widget que representa cada elemento de la lista.
+                  title: Text(hardwareName), // Muestra el nombre del activo.
+                  subtitle: Text('Código: $inventoryCode\nNúmero de serie: $serialNumber'), // Muestra código e info del activo.
                 );
               },
             )
-          : const Center(child: CircularProgressIndicator()), // Muestra un indicador de carga mientras se obtienen los datos
+          : const Center(child: CircularProgressIndicator()), // Muestra un indicador de carga mientras se obtienen los datos.
     );
   }
 }
