@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'package:hive_flutter/hive_flutter.dart'; // Importa hive_flutter
 import 'package:siuu_app/screens/screens.dart';
 import 'package:siuu_app/theme/app_theme.dart';
 
+void main() async {
+  // Inicializa Hive
+  WidgetsFlutterBinding.ensureInitialized(); // Asegúrate de que Flutter esté inicializado
+  await Hive.initFlutter(); // Inicializa Hive
 
-
-void main() => runApp(const MyApp());
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,16 +17,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'SIUU',
-        // home: Listview1Screen(),
-        initialRoute: 'welcome',
-        //home: NavBar(),
-        routes: {
-          'homeScreen': (context) => const HomeScreen(),
-          'listView': (context) => const ListView1Screen(),
-          'welcome': (context) => const WelcomeScreen(),
-        },
-        theme: lightMode);
+      debugShowCheckedModeBanner: false,
+      title: 'SIIU',
+      initialRoute: 'welcome',
+      routes: {
+        'homeScreen': (context) => const HomeScreen(),
+        'listView': (context) => const ListView1Screen(),
+        'welcome': (context) => const WelcomeScreen(),
+      },
+      theme: lightMode,
+    );
   }
 }

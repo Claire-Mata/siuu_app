@@ -48,7 +48,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: WelcomeButton(
-                      buttonText: "ingresar",
+                      buttonText: "ingresar ",
                       onTap: const SplashScreen(screen: SignInScreen()),
                       color: Colors.white,
                       textColor: lightColorScheme.primary,

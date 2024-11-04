@@ -36,17 +36,17 @@ class _NavBarState extends State<NavBar> {
         height: 65.0,
         items: const [
           Icon(
-            Icons.home,
-            color: Colors.white,
-          ),
-          Icon(
             Icons.assignment,
             color: Colors.white,
           ),
           Icon(
-            Icons.favorite,
+            Icons.camera,
             color: Colors.white,
-          )
+          ),
+          // Icon(
+          //   Icons.favorite,
+          //   color: Colors.white,
+          // )
         ],
 
         backgroundColor: const Color.fromARGB(0, 136, 49, 49),
