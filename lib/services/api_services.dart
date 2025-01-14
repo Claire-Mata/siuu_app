@@ -28,7 +28,7 @@ class ApiService { // Define la clase ApiService para manejar la interacción co
       await box.put('token', jsonResponse['access_token']); // Guarda el token de acceso en la caja.
     } else { // Si la respuesta no es exitosa.
       print('Error al iniciar sesión: ${response.body}'); // Imprime el cuerpo de la respuesta de error.
-      throw Exception('Credenciales erroneas'); // Lanza una excepción con un mensaje de error.
+      throw Exception('Credenciales erróneas'); // Lanza una excepción con un mensaje de error.
     }
   }
 
@@ -51,4 +51,39 @@ class ApiService { // Define la clase ApiService para manejar la interacción co
       throw Exception('Error al cargar hardware: ${response.body}'); // Lanza una excepción con un mensaje de error.
     }
   }
+
+  Future<dynamic> getHardwareByBarcode(String barcode, String token) async {
+  var url = Uri.parse('$baseUrl/api/hardware/$barcode'); // URL con el barcode.
+
+  var response = await http.get( // Realiza una solicitud GET al endpoint.
+    url,
+    headers: { 
+      'Authorization': 'Bearer $token', // Autenticación con el token.
+      'Accept': 'application/json', 
+    },
+  );
+
+  if (response.statusCode == 200) {
+    var jsonResponse = jsonDecode(response.body);
+    print('Datos de hardware por código de barras: $jsonResponse');
+    return jsonResponse['data']; // Devuelve los datos del hardware.
+  } else {
+    throw Exception('Error al obtener hardware por código de barras: ${response.body}');
+  }
+}
+Future<Map<String, dynamic>?> getAllEquipments(String token) async {
+  final url = 'https://api.example.com/hardware'; // Cambia por tu URL base
+  final response = await http.get(
+    Uri.parse(url),
+    headers: {'Authorization': 'Bearer $token'},
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Error al obtener equipos: ${response.body}');
+  }
+}
+
+
 }
