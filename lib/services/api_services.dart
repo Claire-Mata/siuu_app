@@ -72,7 +72,7 @@ class ApiService { // Define la clase ApiService para manejar la interacción co
   }
 }
 Future<Map<String, dynamic>?> getAllEquipments(String token) async {
-  final url = 'https://api.example.com/hardware'; // Cambia por tu URL base
+  final url = '$baseUrl/api/hardware'; 
   final response = await http.get(
     Uri.parse(url),
     headers: {'Authorization': 'Bearer $token'},
@@ -82,6 +82,25 @@ Future<Map<String, dynamic>?> getAllEquipments(String token) async {
     return jsonDecode(response.body);
   } else {
     throw Exception('Error al obtener equipos: ${response.body}');
+  }
+}
+// Método para obtener el historial del equipo
+Future<List<dynamic>> getEquipmentHistory(int hardwareId, String token) async {
+  var url = Uri.parse('$baseUrl/api/equipment-histories?hardware_id=$hardwareId'); // Crea la URL con el hardware_id
+  var response = await http.get(
+    url,
+    headers: {
+      'Authorization': 'Bearer $token', // Añadir el token para la autenticación
+      'Accept': 'application/json', // Aceptar JSON como respuesta
+    },
+  );
+
+  if (response.statusCode == 200) {
+    var jsonResponse = jsonDecode(response.body); // Decodificar la respuesta JSON
+    print('Historial del equipo: $jsonResponse');
+    return jsonResponse['data']; // Retornar los registros de historial extraídos de la respuesta
+  } else {
+    throw Exception('Error al obtener historial del equipo: ${response.body}'); // Lanzar una excepción si la respuesta es un error
   }
 }
 
