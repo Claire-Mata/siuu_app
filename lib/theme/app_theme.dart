@@ -17,7 +17,7 @@ const lightColorScheme = ColorScheme(
     onPrimary: Color.fromARGB(255, 243, 218, 218), // Color utilizado en el texto sobre el color primario.
     secondary: Color.fromARGB(255, 230, 122, 114), // Color secundario del esquema.
     onSecondary: Color.fromARGB(255, 243, 218, 218), // Color para el texto sobre el color secundario.
-    error: Color.fromARGB(255, 237, 237, 77), // Color utilizado para representar errores.
+    error: Color.fromARGB(255, 237, 184, 77), // Color utilizado para representar errores.
     onError: Color.fromARGB(255, 250, 243, 243), // Color para el texto sobre el color de error.
     // background: Color(0xFFFCFDF6), // Color de fondo (comentado).
     // onBackground: Color(0xFF1A1C18), // Color para el texto sobre el fondo (comentado).

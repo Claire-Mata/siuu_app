@@ -136,7 +136,19 @@ class _ListView1ScreenState extends State<ListView1Screen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => HistorialScreen(hardwareDetails: hardware), // Pasa los detalles del hardware a la nueva pantalla.
+                            builder: (context) => HistorialScreen(
+                              hardwareDetails: {
+                                'name': hardware['name'],
+                                'inventory_code': hardware['inventory_code'],
+                               'category': hardware['category'], // Pasamos el objeto completo de la categoría
+                               'status':hardware['status'],
+                               'serial_number':hardware['serial_number'],
+                               'manufacturer_id':hardware['manufacturer_id'],
+                               'model_id':hardware['model_id'],
+                               'warranty_expiration_date':hardware['warranty_expiration_date'],
+                                // Otros detalles del hardware...
+                              },
+                            ),
                           ),
                         );
                       },

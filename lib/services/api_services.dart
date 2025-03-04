@@ -84,23 +84,30 @@ Future<Map<String, dynamic>?> getAllEquipments(String token) async {
     throw Exception('Error al obtener equipos: ${response.body}');
   }
 }
-// Método para obtener el historial del equipo
-Future<List<dynamic>> getEquipmentHistory(int hardwareId, String token) async {
-  var url = Uri.parse('$baseUrl/api/equipment-histories?hardware_id=$hardwareId'); // Crea la URL con el hardware_id
+// Método para obtener el historial del equipo por categoría y código de inventario
+Future<List<dynamic>> getEquipmentHistoryByCategoryAndInventory(int categoryId, String inventoryCode, String token) async {
+  var url = Uri.parse('$baseUrl/api/equipment-history/$categoryId/$inventoryCode');
   var response = await http.get(
     url,
     headers: {
-      'Authorization': 'Bearer $token', // Añadir el token para la autenticación
-      'Accept': 'application/json', // Aceptar JSON como respuesta
+      'Authorization': 'Bearer $token',
+      'Accept': 'application/json',
     },
   );
 
   if (response.statusCode == 200) {
-    var jsonResponse = jsonDecode(response.body); // Decodificar la respuesta JSON
-    print('Historial del equipo: $jsonResponse');
-    return jsonResponse['data']; // Retornar los registros de historial extraídos de la respuesta
+    var jsonResponse = jsonDecode(response.body);
+    print('Respuesta de la API: ${response.body}');
+
+    // Verifica si la clave `equipment_histories` existe
+    if (jsonResponse['hardware'] != null && jsonResponse['hardware']['equipment_histories'] is List) {
+      return jsonResponse['hardware']['equipment_histories'];
+    } else {
+      print('No hay historial disponible');
+      return [];
+    }
   } else {
-    throw Exception('Error al obtener historial del equipo: ${response.body}'); // Lanzar una excepción si la respuesta es un error
+    throw Exception('Error al obtener historial del equipo: ${response.body}');
   }
 }
 

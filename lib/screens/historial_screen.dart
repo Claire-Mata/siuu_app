@@ -10,31 +10,37 @@ class HistorialScreen extends StatefulWidget {
   const HistorialScreen({super.key, required this.hardwareDetails});
 
   @override
-  
   _HistorialScreenState createState() => _HistorialScreenState();
 }
+
 class _HistorialScreenState extends State<HistorialScreen> {
-  // Inicializamos _history con un Future vacío
   late Future<List<dynamic>> _history = Future.value([]);
+
   @override
   void initState() {
     super.initState();
     _loadHistory();
   }
+
   Future<void> _loadHistory() async {
     var box = await Hive.openBox('authBox'); // Abrimos la caja donde tenemos el token
     String token = box.get('token') ?? ''; // Obtenemos el token
 
     if (token.isNotEmpty) {
-      // Hacemos la solicitud del historial del equipo usando el hardware_id
+      // Hacemos la solicitud del historial del equipo usando el categoryId y inventoryCode
       setState(() {
-        _history = ApiService().getEquipmentHistory(widget.hardwareDetails['id'], token);
+        _history = ApiService().getEquipmentHistoryByCategoryAndInventory(
+          widget.hardwareDetails['category']['id'], // Accedemos al id de la categoría
+          widget.hardwareDetails['inventory_code'], // Accedemos al código de inventario
+          token,
+        );
       });
     } else {
       // Si no hay token, mostramos un mensaje de error
       print('No token found');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,8 +54,20 @@ class _HistorialScreenState extends State<HistorialScreen> {
             Text('Nombre: ${widget.hardwareDetails['name'] ?? 'No disponible'}', 
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
-            Text('ID de Inventario: ${widget.hardwareDetails['id'] ?? 'No disponible'}'),
+            Text('ID de Inventario: ${widget.hardwareDetails['inventory_code'] ?? 'No disponible'}'),
             SizedBox(height: 8),
+            Text('Categoría: ${widget.hardwareDetails['category']['name'] ?? 'No disponible'}'),
+            SizedBox(height: 8),
+            Text('Estado: ${widget.hardwareDetails['status'] ?? 'No disponible'}'),
+            SizedBox(height: 8),
+            Text('Número de Serie: ${widget.hardwareDetails['serial_number'] ?? 'No disponible'}'),
+            SizedBox(height: 8),
+            Text('Fabricante: ${widget.hardwareDetails['manufacturer_id'] ?? 'No disponible'}'),
+            SizedBox(height: 8),
+            Text('Modelo: ${widget.hardwareDetails['model_id'] ?? 'No disponible'}'),
+            SizedBox(height: 8),
+            Text('Fecha de Expiración de Garantía: ${widget.hardwareDetails['warranty_expiration_date'] ?? 'No disponible'}'),
+
             // Otros detalles del hardware...
             SizedBox(height: 16),
             // Mostramos el historial

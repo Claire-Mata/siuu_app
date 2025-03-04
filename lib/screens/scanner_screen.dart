@@ -75,24 +75,57 @@ class ScannerScreenState extends State<ScannerScreen> {
 
   // Método para buscar un equipo por código de barras
   void _findEquipmentByBarcode(String barcode) {
-    var matchedEquipment = allEquipments.firstWhere(
-      (equipment) => equipment['inventory_code'] == barcode,
-      orElse: () => null,
-    );
+  var matchedEquipments = allEquipments.where(
+    (equipment) => equipment['inventory_code'] == barcode,
+  ).toList();
 
-    if (matchedEquipment != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HistorialScreen(hardwareDetails: matchedEquipment),
+  if (matchedEquipments.isNotEmpty) {
+    if (matchedEquipments.length == 1) {
+      // Si solo hay un equipo, ir directamente a la pantalla de historial
+      _navigateToHistorial(matchedEquipments.first);
+    } else {
+      // Si hay varios equipos con el mismo código, mostrar selección
+      _showCategorySelectionDialog(matchedEquipments);
+    }
+  } else {
+    setState(() {
+      scanResult = 'No se encontró un equipo con este código de barras.';
+    });
+  }
+}
+
+void _showCategorySelectionDialog(List<dynamic> matchedEquipments) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text("Seleccionar Equipo"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: matchedEquipments.map((equipment) {
+            return ListTile(
+              title: Text("Equipo"),
+              subtitle: Text(equipment['name'] ?? "Sin nombre"),
+              onTap: () {
+                Navigator.pop(context); // Cierra el diálogo
+                _navigateToHistorial(equipment);
+              },
+            );
+          }).toList(),
         ),
       );
-    } else {
-      setState(() {
-        scanResult = 'No se encontró un equipo con este código de barras.';
-      });
-    }
-  }
+    },
+  );
+}
+
+void _navigateToHistorial(dynamic equipment) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => HistorialScreen(hardwareDetails: equipment),
+    ),
+  );
+}
 
   @override
   void initState() {
