@@ -41,16 +41,16 @@ class _HistorialScreenState extends State<HistorialScreen> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Historial del Activo')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+ @override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(title: const Text('Historial del Activo')),
+    body: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SingleChildScrollView( // Permite hacer scroll en caso de overflow
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Detalles del hardware (ya lo tienes implementado)
             Text('Nombre: ${widget.hardwareDetails['name'] ?? 'No disponible'}', 
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
@@ -68,11 +68,10 @@ class _HistorialScreenState extends State<HistorialScreen> {
             SizedBox(height: 8),
             Text('Fecha de Expiración de Garantía: ${widget.hardwareDetails['warranty_expiration_date'] ?? 'No disponible'}'),
 
-            // Otros detalles del hardware...
             SizedBox(height: 16),
-            // Mostramos el historial
+
             FutureBuilder<List<dynamic>>(
-              future: _history, // Usamos el Future
+              future: _history,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -81,9 +80,11 @@ class _HistorialScreenState extends State<HistorialScreen> {
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return const Center(child: Text('No hay historial disponible'));
                 }
+
                 final histories = snapshot.data!;
                 return ListView.builder(
-                  shrinkWrap: true, // Usamos shrinkWrap para que la lista no ocupe todo el espacio
+                  shrinkWrap: true, // Permite que se adapte dentro del SingleChildScrollView
+                  physics: NeverScrollableScrollPhysics(), // Evita conflictos con el scroll general
                   itemCount: histories.length,
                   itemBuilder: (context, index) {
                     final history = histories[index];
@@ -108,6 +109,8 @@ class _HistorialScreenState extends State<HistorialScreen> {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 }
