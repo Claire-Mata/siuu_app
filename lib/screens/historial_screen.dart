@@ -95,6 +95,7 @@ class _HistorialScreenState extends State<HistorialScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Acción: ${history['action'] ?? 'No disponible'}'),
+                            Text('Descripcion: ${history['description'] ?? 'No disponible'}'),
                             Text('Fecha: ${history['created_at'] ?? 'No disponible'}'),
                           ],
                         ),

@@ -13,7 +13,7 @@ class SplashScreen extends StatelessWidget { // Define la clase SplashScreen com
       nextScreen: screen!, // Especifica la pantalla siguiente que se mostrará después del splash (asegura que 'screen' no es nulo).
       splashTransition: SplashTransition.fadeTransition, // Define la transición de animación del splash.
       splashIconSize: 200, // Establece el tamaño del ícono de splash.
-      backgroundColor: const Color.fromARGB(255, 219, 171, 171), // Establece el color de fondo de la pantalla de inicio.
+      backgroundColor: const Color.fromARGB(255, 163, 4, 4), // Establece el color de fondo de la pantalla de inicio.
     );
   }
 }
